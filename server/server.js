@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const authRouter = require("./routes/auth/auth-routes");
@@ -18,8 +19,10 @@ const commonFeatureRouter = require("./routes/common/feature-routes");
 //create a database connection -> u can also
 //create a separate file for this and then import/use that file here
 
+dotenv.config();
+
 mongoose
-  .connect("mongodb+srv://mehdi000077777:uPa0SQHSNXd2rWVP@cluster0.6lmcg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+  .connect(process.env.DATABASE_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log(error));
 
